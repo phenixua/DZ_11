@@ -106,11 +106,11 @@ class AddressBook(UserDict):
             yield page_records
             current_page += 1
 
-# Тестування класів
+
 if __name__ == "__main__":
     name = Name('Bill')
     phone = Phone('1234567890')
-    birthday = Birthday(datetime(2000, 5, 10))  # Приклад дня народження
+    birthday = Birthday(datetime(2000, 5, 10))  
     rec = Record(name, [phone], birthday=birthday)  
     ab = AddressBook()
     ab.add_record(rec)  
