@@ -13,8 +13,7 @@ class Phone(Field):
 
     @staticmethod
     def validate_phone(value):
-        # Додайте власну логіку перевірки номера телефону
-        return True
+        return value.isdigit() and len(value) == 10
 
     @property
     def value(self):
@@ -39,8 +38,7 @@ class Birthday(Field):
 
     @staticmethod
     def validate_birthday(value):
-        # Додайте власну логіку перевірки дня народження
-        return True
+        return isinstance(value, datetime) and value >= datetime.now()
 
     @property
     def value(self):
