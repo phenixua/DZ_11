@@ -16,6 +16,18 @@ class Phone(Field):
         # Додайте власну логіку перевірки номера телефону
         return True
 
+    @property
+    def value(self):
+        return self._value
+
+    @value.setter
+    def value(self, new_value):
+        if self.validate_phone(new_value):
+            self._value = new_value
+        else:
+            raise ValueError("Invalid phone number")
+
+
 class Name(Field):
     pass
 
@@ -29,6 +41,18 @@ class Birthday(Field):
     def validate_birthday(value):
         # Додайте власну логіку перевірки дня народження
         return True
+
+    @property
+    def value(self):
+        return self._value
+
+    @value.setter
+    def value(self, new_value):
+        if self.validate_birthday(new_value):
+            self._value = new_value
+        else:
+            raise ValueError("Invalid birthday")
+
 
 class Record:
     def __init__(self, name: Name, phones: list, emails: list=None, birthday: Birthday=None):
@@ -78,7 +102,10 @@ class AddressBook(UserDict):
         current_page = 0
 
         while current_page * self.per_page < len(keys):
-            yield [self[key] for key in keys[current_page * self.per_page: (current_page + 1) * self.per_page]]
+            start_index = current_page * self.per_page
+            end_index = (current_page + 1) * self.per_page
+            page_records = [self[key] for key in keys[start_index:end_index]]
+            yield page_records
             current_page += 1
 
 # Тестування класів
