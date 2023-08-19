@@ -38,7 +38,7 @@ class Birthday(Field):
 
     @staticmethod
     def validate_birthday(value):
-        return isinstance(value, datetime) and value >= datetime.now()
+        return isinstance(value, datetime) and value <= datetime.now()
 
     @property
     def value(self):
